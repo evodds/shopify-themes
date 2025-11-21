@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page_title | default: shop.name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+    {{ content_for_header }}
+  </head>
+  <body>
+    <header class="announcement">
+      <div class="shell announcement__inner">
+        <p>
+          Free shipping on orders over $50 &bull; Use code <span class="text-strong">CUTE25</span> for 25% off
+        </p>
+        <button class="announcement__close" type="button" aria-label="Dismiss announcement">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="countdown" aria-label="Flash sale countdown">
+      <div class="shell">
+        <div class="countdown__inner">
+          <p class="countdown__label"><strong>Flash Sale Ends In:</strong></p>
+          <div class="countdown__timer" role="timer" aria-live="polite">
+            <div class="time-unit">
+              <div id="hours" class="time-value">12</div>
+              <span class="time-label">Hours</span>
+            </div>
+            <span class="time-separator" aria-hidden="true">:</span>
+            <div class="time-unit">
+              <div id="minutes" class="time-value">34</div>
+              <span class="time-label">Min</span>
+            </div>
+            <span class="time-separator" aria-hidden="true">:</span>
+            <div class="time-unit">
+              <div id="seconds" class="time-value">56</div>
+              <span class="time-label">Sec</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <header class="site-header">
+      <div class="shell">
+        <div class="header__inner">
+          <button class="menu-toggle" type="button" aria-label="Open navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="brand">
+            <span class="brand__mark" aria-hidden="true">&#127800;</span>
+            <div>
+              <p class="brand__name">{{ shop.name }}</p>
+              <p class="brand__tagline">Dreamier fits every day.</p>
+            </div>
+          </div>
+          <nav aria-label="Primary">
+            <ul class="nav-links">
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#fresh-arrivals">Shop</a></li>
+              <li><a href="#fresh-arrivals">New Arrivals</a></li>
+              <li><a class="nav-highlight" href="#sale">Sale &#127872;</a></li>
+            </ul>
+          </nav>
+          <div class="header-actions">
+            <label class="search-field search-field--desktop">
+              <span class="visually-hidden">Search products</span>
+              <span class="search-field__icon" aria-hidden="true">&#128269;</span>
+              <input type="search" placeholder="Search cute items...">
+            </label>
+            <button class="icon-button" type="button" aria-label="Wishlist">
+              <span aria-hidden="true">&#9825;</span>
+            </button>
+            <button class="icon-button icon-button--account" type="button" aria-label="Account">
+              <span aria-hidden="true">&#9786;</span>
+            </button>
+            <a class="icon-button icon-button--badge" href="{{ routes.cart_url }}" aria-label="Cart">
+              <span aria-hidden="true">&#128717;</span>
+              <span class="icon-button__badge">{{ cart.item_count }}</span>
+            </a>
+          </div>
+        </div>
+        <div class="header__mobile-search">
+          <label class="search-field search-field--full">
+            <span class="visually-hidden">Search products</span>
+            <span class="search-field__icon" aria-hidden="true">&#128269;</span>
+            <input type="search" placeholder="Search cute items...">
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      {{ content_for_layout }}
+    </main>
+
+    <footer class="site-footer" id="sale">
+      <div class="shell footer__grid">
+        <div>
+          <div class="brand">
+            <span class="brand__mark" aria-hidden="true">&#127800;</span>
+            <div>
+              <p class="brand__name">{{ shop.name }}</p>
+              <p class="brand__tagline">Dreamier fits every day.</p>
+            </div>
+          </div>
+          <p class="footer__text">Your destination for all things cute and pastel. Spreading joy, one tee at a time!</p>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="#fresh-arrivals">New Arrivals</a></li>
+            <li><a href="#best-sellers">Tees</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#sale">Sale</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Help</h3>
+          <ul>
+            <li><a href="/pages/shipping">Shipping Info</a></li>
+            <li><a href="/pages/returns">Returns</a></li>
+            <li><a href="/pages/size-guide">Size Guide</a></li>
+            <li><a href="/pages/contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>About</h3>
+          <ul>
+            <li><a href="/pages/about">Our Story</a></li>
+            <li><a href="/pages/sustainability">Sustainability</a></li>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/terms-of-service">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="shell footer__bottom">
+        <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Made with love for cute lovers everywhere.</p>
+        <div class="footer__socials">
+          <a href="https://www.instagram.com" aria-label="Instagram"><span aria-hidden="true">&#128248;</span></a>
+          <a href="https://www.tiktok.com" aria-label="TikTok"><span aria-hidden="true">&#128038;</span></a>
+          <a href="https://www.youtube.com" aria-label="YouTube"><span aria-hidden="true">&#9654;</span></a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </body>
+</html>

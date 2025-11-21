@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "product_grid": {
+      "type": "product-grid",
+      "settings": {
+        "heading": "✨ Fresh Arrivals",
+        "subheading": "Hand-picked looks just dropped",
+        "collection": "frontpage",
+        "anchor": "fresh-arrivals"
+      }
+    }
+  },
+  "order": ["hero", "product_grid"]
+}

@@ -1,0 +1,194 @@
+{% assign grid_collection = collections[section.settings.collection] %}
+<section id="{{ section.settings.anchor | default: 'fresh-arrivals' }}" class="product-section shell">
+  <header class="section-header">
+    <div>
+      {% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      {% if section.settings.heading != blank %}<h2>{{ section.settings.heading }}</h2>{% endif %}
+      {% if section.settings.subheading != blank %}<p>{{ section.settings.subheading }}</p>{% endif %}
+    </div>
+    {% if section.settings.button_label != blank %}
+      <a class="link-button" href="{{ section.settings.button_link | default: '/collections/all' }}">
+        {{ section.settings.button_label }}
+      </a>
+    {% endif %}
+  </header>
+
+  {% if section.blocks.size > 0 %}
+    <div class="category-row" aria-label="Product categories">
+      <div class="category-scroll" role="tablist">
+        <button class="category-chip is-active" data-category="all" data-category-chip>
+          <span aria-hidden="true">*</span> <span>All</span>
+        </button>
+        {% for block in section.blocks %}
+          <button class="category-chip" data-category="{{ block.settings.filter_value | handle }}" data-category-chip {{ block.shopify_attributes }}>
+            {% if block.settings.icon != blank %}
+              <span aria-hidden="true">{{ block.settings.icon }}</span>
+            {% endif %}
+            <span>{{ block.settings.label }}</span>
+          </button>
+        {% endfor %}
+      </div>
+      <div class="category-fade" aria-hidden="true"></div>
+    </div>
+  {% endif %}
+
+  <div class="product-grid">
+    {% if grid_collection and grid_collection.products_count > 0 %}
+      {% for product in grid_collection.products limit: section.settings.limit %}
+        {% assign product_category = product.type | handle %}
+        <article class="product-card" data-category-card data-category="{{ product_category }}">
+          <div class="product-media">
+            {% if product.featured_image %}
+              {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+            {% else %}
+              <img
+                src="https://images.unsplash.com/photo-1596249187757-def82f42ca3c?auto=format&fit=crop&w=600&q=80"
+                alt="{{ product.title }}"
+                loading="lazy"
+              >
+            {% endif %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-badge product-badge--sale">Sale</span>
+            {% endif %}
+          </div>
+          <div class="product-body">
+            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            {% if product.description != blank %}
+              <p>{{ product.description | strip_html | truncatewords: 16 }}</p>
+            {% endif %}
+            <div class="product-meta">
+              <span class="price">{{ product.price | money }}</span>
+              {% if product.compare_at_price > product.price %}
+                <span class="compare">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+            </div>
+            {% if product.metafields.reviews.rating.value %}
+              <div class="product-rating" aria-label="Rated {{ product.metafields.reviews.rating.value }} out of 5">
+                <span aria-hidden="true" class="product-rating__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span>({{ product.metafields.reviews.rating.value }})</span>
+              </div>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>Add products to the selected collection to see them here.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Section anchor (id)",
+      "default": "fresh-arrivals"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "New In"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Fresh Arrivals"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Hand-picked looks just dropped"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "default": "frontpage"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category chip",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Tees"
+        },
+        {
+          "type": "text",
+          "id": "filter_value",
+          "label": "Filter handle (matches product type)",
+          "default": "tees"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji or text)",
+          "default": "*"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kawaii product grid",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "label": "Tees",
+            "filter_value": "tees",
+            "icon": "*"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "label": "Accessories",
+            "filter_value": "accessories",
+            "icon": "*"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "label": "Bags",
+            "filter_value": "bags",
+            "icon": "*"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
