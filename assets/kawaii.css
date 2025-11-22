@@ -1,0 +1,215 @@
+.kc-hero {
+  --kc-surface-base: #ffffff;
+  --kc-surface-pink: #fadbef;
+  --kc-text-primary: #222222;
+  --kc-text-secondary: #4b5563;
+  --kc-accent-primary: #c2185b;
+  --kc-accent-hover: #a5124c;
+  --kc-accent-subtle: #f8c8da;
+  --kc-border-default: #e5e7eb;
+  --kc-shadow-soft: 0 8px 20px rgba(194, 24, 91, 0.12);
+  --kc-shadow-card: 0 18px 40px rgba(194, 24, 91, 0.18);
+  color: var(--kc-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.kc-hero .shell {
+  width: min(1120px, 100%);
+  margin: 48px auto 0;
+  padding: 0 32px;
+}
+
+.kc-hero .hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  background: linear-gradient(
+    135deg,
+    var(--kc-hero-bg, var(--kc-surface-pink)),
+    var(--kc-accent-subtle),
+    var(--kc-surface-base)
+  );
+  border-radius: 32px;
+  padding: 48px;
+  box-shadow: var(--kc-shadow-card);
+  overflow: hidden;
+}
+
+.kc-hero .hero__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.kc-hero .hero__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  box-shadow: var(--kc-shadow-soft);
+}
+
+.kc-hero .hero__tag .icon {
+  font-size: 1rem;
+}
+
+.kc-hero .hero__copy h1 {
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin: 16px 0 12px;
+  line-height: 1.1;
+}
+
+.kc-hero .hero__copy h1 span {
+  color: var(--kc-accent-primary);
+}
+
+.kc-hero .hero__copy p {
+  margin: 0 0 16px;
+  color: var(--kc-text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.kc-hero .hero__ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.kc-hero .btn {
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 160px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.kc-hero .btn-primary {
+  border: none;
+  background: var(--kc-accent-primary);
+  color: #fff;
+  box-shadow: var(--kc-shadow-card);
+}
+
+.kc-hero .btn-primary:hover {
+  background: var(--kc-accent-hover);
+}
+
+.kc-hero .btn-outline {
+  border: 2px solid var(--kc-accent-primary);
+  color: var(--kc-accent-primary);
+  background: #fff;
+}
+
+.kc-hero .btn-outline:hover {
+  background: var(--kc-accent-subtle);
+}
+
+.kc-hero .hero__stats {
+  display: flex;
+  gap: 32px;
+  margin: 32px 0 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.kc-hero .hero__stats > div {
+  position: relative;
+  min-width: 120px;
+}
+
+.kc-hero .hero__stats > div + div::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 8px;
+  width: 1px;
+  height: 40px;
+  background: var(--kc-border-default);
+}
+
+.kc-hero .hero__stats dt {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--kc-accent-primary);
+}
+
+.kc-hero .hero__stats dd {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: var(--kc-text-secondary);
+}
+
+.kc-hero .hero__visual figure {
+  margin: 0;
+  position: relative;
+  height: 100%;
+}
+
+.kc-hero .hero__visual img {
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  object-fit: cover;
+}
+
+.kc-hero .kc-hero__image-placeholder {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 28px;
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.2) 12px,
+      transparent 12px,
+      transparent 24px
+    ),
+    var(--kc-accent-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--kc-accent-hover);
+}
+
+.kc-hero .hero__badge {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: var(--kc-shadow-soft);
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .kc-hero .hero {
+    padding: 32px;
+  }
+
+  .kc-hero .hero__stats {
+    gap: 16px;
+  }
+
+  .kc-hero .hero__stats > div + div::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .kc-hero .shell {
+    padding: 0 20px;
+  }
+
+  .kc-hero .btn {
+    width: 100%;
+  }
+}

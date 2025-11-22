@@ -1,0 +1,145 @@
+{%- liquid
+  assign hero_bg = section.settings.background_color | default: '#fdf2ff'
+  assign heading = section.settings.heading | default: 'Dress in Your Dreamiest Style'
+  assign subheading = section.settings.subheading | default: 'Explore our kawaii collection of pastel tees and accessories. Each piece is designed to bring joy and cuteness to your everyday wardrobe! &#127800;'
+  assign primary_label = section.settings.button_label | default: 'Shop Collection &#10024;'
+  assign secondary_label = section.settings.secondary_button_label
+  assign hero_image = section.settings.hero_image
+  assign hero_alt = heading
+  if hero_alt == blank
+    assign hero_alt = shop.name
+  endif
+  if hero_image != blank and hero_image.alt != blank
+    assign hero_alt = hero_image.alt
+  endif
+-%}
+
+<section class="kc-hero" style="--kc-hero-bg: {{ hero_bg }};">
+  <div class="hero shell">
+    <div class="hero__content">
+      <div class="hero__tag">
+        <span class="icon" aria-hidden="true">&#10024;</span>
+        <span>New Spring Collection</span>
+      </div>
+      <div class="hero__copy">
+        <h1>{{ heading }}</h1>
+        <p>{{ subheading }}</p>
+      </div>
+      <div class="hero__ctas">
+        {% if primary_label != blank %}
+          <a
+            class="btn btn-primary"
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% else %}
+              role="button"
+              aria-disabled="true"
+            {% endif %}
+          >
+            {{ primary_label }}
+          </a>
+        {% endif %}
+        {% if secondary_label != blank %}
+          <a
+            class="btn btn-outline"
+            {% if section.settings.secondary_button_link != blank %}
+              href="{{ section.settings.secondary_button_link }}"
+            {% else %}
+              role="button"
+              aria-disabled="true"
+            {% endif %}
+          >
+            {{ secondary_label }}
+          </a>
+        {% endif %}
+      </div>
+      <dl class="hero__stats">
+        <div>
+          <dt>500+</dt>
+          <dd>Cute Items</dd>
+        </div>
+        <div>
+          <dt>10k+</dt>
+          <dd>Happy Customers</dd>
+        </div>
+        <div>
+          <dt>4.9</dt>
+          <dd>Rating <span aria-hidden="true">&#11088;</span></dd>
+        </div>
+      </dl>
+    </div>
+    <div class="hero__visual">
+      <figure>
+        {% if hero_image != blank %}
+          {{ hero_image | image_url: width: 900 | image_tag: alt: hero_alt, loading: 'lazy' }}
+        {% else %}
+          <div class="kc-hero__image-placeholder" role="img" aria-label="Upload a hero image in the theme editor.">
+            Add your hero image &rarr;
+          </div>
+        {% endif %}
+        <figcaption class="hero__badge">
+          <p>Limited Edition</p>
+          <strong>25% OFF</strong>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kawaii Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Dress in Your Dreamiest Style"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore our kawaii collection of pastel tees and accessories. Each piece is designed to bring joy and cuteness to your everyday wardrobe! &#127800;"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button label",
+      "default": "Shop Collection &#10024;"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_label",
+      "label": "Secondary button label",
+      "default": "How It Works"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fdf2ff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kawaii hero"
+    }
+  ]
+}
+{% endschema %}

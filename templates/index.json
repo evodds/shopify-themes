@@ -1,5 +1,13 @@
 {
   "sections": {
+    "kc-hero": {
+      "type": "kc-hero",
+      "settings": {
+        "heading": "Dress in Your Dreamiest Style",
+        "subheading": "Explore our kawaii collection of pastel tees and accessories. Each piece is designed to bring joy and cuteness to your everyday wardrobe! \uD83C\uDF38",
+        "button_label": "Shop Collection \u2728"
+      }
+    },
     "hero": {
       "type": "hero",
       "settings": {}
@@ -7,12 +15,16 @@
     "product_grid": {
       "type": "product-grid",
       "settings": {
-        "heading": "✨ Fresh Arrivals",
+        "heading": "\u2728 Fresh Arrivals",
         "subheading": "Hand-picked looks just dropped",
         "collection": "frontpage",
         "anchor": "fresh-arrivals"
       }
     }
   },
-  "order": ["hero", "product_grid"]
+  "order": [
+    "kc-hero",
+    "hero",
+    "product_grid"
+  ]
 }
